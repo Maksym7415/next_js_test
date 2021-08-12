@@ -1,0 +1,1 @@
+export const GET_PHOTO_URLS = '[GALLERY] GET PHOTO URLS'

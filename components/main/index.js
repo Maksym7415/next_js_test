@@ -1,5 +1,8 @@
+
+
+
 const MainPage = (props) => 
-  <div className='app-container'>
+  <div className='app-container main'>
     <header className='header'>
       Test Task - single page Next JS app with server side data
     </header>
