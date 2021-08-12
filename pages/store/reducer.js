@@ -1,7 +1,11 @@
-import { GET_PHOTO_URLS } from "./actionTypes"
+import { GET_PHOTO_URLS, FETCH_DATA } from "./actionTypes"
 
 const initialState = {
-    photoUrls: []
+    data: {
+        pagination: {},
+        data: [],
+    },
+    isFetching: false
 }
 
 const galleryReducer = (state = initialState, {type, payload}) => {
@@ -9,7 +13,14 @@ const galleryReducer = (state = initialState, {type, payload}) => {
         case GET_PHOTO_URLS: {
             return {
                 ...state,
-                photoUrls: payload
+                data: payload,
+                isFetching: false
+            }
+        }
+        case FETCH_DATA: {
+            return {
+                ...state,
+                isFetching: true
             }
         }
         default: return state

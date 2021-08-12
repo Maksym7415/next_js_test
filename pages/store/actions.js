@@ -1,10 +1,13 @@
 
 import fetcher from "../../helpers/fetcher"
-import { GET_PHOTO_URLS } from "./actionTypes";
+import { FETCH_DATA, GET_PHOTO_URLS } from "./actionTypes";
 
-export const getPhotoUrlsAction = () => async (dispatch) => {
+export const getPhotoUrlsAction = (offset = 0) => async (dispatch) => {
     try {
-        const response = await fetcher('http://localhost:3000/api/test');
+        dispatch({
+            type: FETCH_DATA
+        })
+        const response = await fetcher(`http://localhost:3000/api/get-photo-url?limit=9&offset=${offset}`);
         return dispatch({
             type: GET_PHOTO_URLS,
             payload: response
