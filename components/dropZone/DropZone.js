@@ -132,7 +132,20 @@ function DropZone() {
       </button>
       <button 
         className='drop-zone__submit-btn'
-        onClick={() => {}}
+        onClick={ async () => {
+            const formData = new FormData()
+            formData.append('textarea', values.textarea)
+            formData.append('input', values.input)
+            Object.values(files).forEach(({ file }) => {
+                formData.append('files', file)
+            })
+            const requestOptions = {
+                method: 'POST',
+                body: formData,
+                redirect: 'follow'
+              };
+            const data = await fetch('http://localhost:3000/api/upload-gallery', requestOptions);
+        }}
       >
         Submit
       </button>

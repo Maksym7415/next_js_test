@@ -7,7 +7,7 @@ export const getPhotoUrlsAction = (offset = 0) => async (dispatch) => {
         dispatch({
             type: FETCH_DATA
         })
-        const response = await fetcher(`http://localhost:3000/api/get-photo-url?limit=9&offset=${offset}`);
+        const response = await fetcher(`http://localhost:3000/api/get-gallery?limit=9&offset=${offset}`);
         return dispatch({
             type: GET_PHOTO_URLS,
             payload: response
