@@ -1,2 +1,3 @@
 export const GET_PHOTO_URLS = '[GALLERY] GET PHOTO URLS';
+export const UPLOAD_DATA = '[GALLERY] UPLOAD DATA';
 export const FETCH_DATA = 'FETCH DATA';

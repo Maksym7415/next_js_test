@@ -13,7 +13,7 @@ function PhotoItem({ url, id }) {
                 <div className='eye-icon'>
                     <img src='../../images/eye.svg'/>
                 </div>
-                <img src={url}/>
+                <img src={`${window.location.origin}/uploads/${url}`}/>
             </div>
             
         </div>
@@ -56,7 +56,7 @@ function Gallery() {
     const dispatch = useDispatch();
     const data = useSelector((reducer) => reducer.data.data);
     const pagination = useSelector((reducer) => reducer.data.pagination);
-    const isFetching = useSelector((reducer) => reducer.isFetching)
+    const isFetching = useSelector((reducer) => reducer.data.isFetching)
 
     useEffect(() => {
         dispatch(getPhotoUrlsAction())
@@ -67,16 +67,16 @@ function Gallery() {
         <div className='gallery__wrapper'>
             <div className='gallery__title'>
                 <span>
-                    Photo Gallery
+                   {data.data.input || 'Photo Gallery'}
                 </span>
             </div>
             <div className='gallery__description'>
-                <span>A selection of the latest photos from our restaurant and some of our favourite dishes</span>
+                <span>{data.data.textarea || 'A selection of the latest photos from our restaurant and some of our favourite dishes'}</span>
             </div>
             <div className='gallery__photos'>
                 {isFetching 
                 ? <img className='loader' src='../../images/loader.svg'/>
-                : data.map((item, i) => (
+                : data.files.map((item, i) => (
                     <PhotoItem key={i} {...item}/>
                 ))}
             </div>

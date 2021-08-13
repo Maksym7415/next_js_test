@@ -1,5 +1,6 @@
 import nextConnect from 'next-connect';
 import multer from 'multer';
+import fs from 'fs';
 import { getId } from '../../utils';
 
 
@@ -10,7 +11,6 @@ const storage = multer.diskStorage({
     filename(req, file, cb) {
       const name = getId(12)
       const extension = file.originalname.split('.');
-      console.log(file)
       cb(null, `${name}.${extension[extension.length - 1]}`);
     },
   });
@@ -25,11 +25,17 @@ const uploadGallery = nextConnect({
       res.status(405).json({ error: `Method '${req.method}' Not Allowed` });
     },
   });
+
 uploadGallery.use(uploadMiddleware)
-// Process a POST request
+
 uploadGallery.post((req, res) => {
-console.log(Object.keys(req), req.body)
-res.status(200).json({ data: 'success' });
+  // fs.readdirSync('public/uploads').forEach((fileName) => {
+  //   fs.unlinkSync(`public/uploads/${fileName}`)
+  // });
+  fs.writeFileSync('public/gallery.json', JSON.stringify(req.body), (err) => {
+    console.log(err)
+  })
+  res.status(201).end();
 });
 
 export const config = {
@@ -38,4 +44,4 @@ export const config = {
   }
 }
 
-  export default uploadGallery;
+export default uploadGallery;
