@@ -1,5 +1,5 @@
 
-import fetcher from "../../helpers/fetcher"
+import fetcher from "../helpers/fetcher"
 import { FETCH_DATA, GET_PHOTO_URLS } from "./actionTypes";
 
 export const getPhotoUrlsAction = (offset = 0) => async (dispatch) => {
