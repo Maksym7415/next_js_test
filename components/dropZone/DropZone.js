@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { getId } from '../../utils';
 import './styles/index.scss';
 
@@ -11,12 +12,15 @@ function Preview({name, src}) {
 }
 
 function DropZone() {
+  const dispatch = useDispatch();
+  const isPhotosUploading = useSelector((reducer) => reducer.upload.isFetching);
   const fileInputRef = useRef(null);
   const [files, setFiles] = useState({});
   const [values, setValues] = useState({
     input: "",
     textarea: ""
   });
+  const [dragHover, setDragHower] = useState(false);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -100,30 +104,38 @@ function DropZone() {
           onChange={handleChange}
         />
       </div>
-      <div 
-        className='drop-zone__dashed-cont'
-        onClick={openFileDialog}
-        onDragOver={onDragOver}
-        onDragLeave={onDragLeave}
-      >
-        {
-          !Object.keys(files).length
-            ? 'Drag photos here'
-            : <div className='preview-items'>
-             {Object.entries(files).map(([ key, { src, file } ]) => (
-              <Preview key={key} src={src} name={file.name} />
-            ))}
+      {
+        isPhotosUploading
+          ? <div className='drop-zone__preloader-cont'><img className='loader' src='../../images/loader.svg'/></div>
+          : (
+            <div 
+              className='drop-zone__dashed-cont'
+              onClick={openFileDialog}
+              onDragOver={onDragOver}
+              onDragLeave={onDragLeave}
+              onDrop={onDrop}
+              style={dragHover ? {borderColor: "blue"} : {}}
+            >
+              {
+                !Object.keys(files).length
+                  ? 'Drag photos here'
+                  : <div className='preview-items'>
+                  {Object.entries(files).map(([ key, { src, file } ]) => (
+                    <Preview key={key} src={src} name={file.name} />
+                  ))}
+                  </div>
+              }
+              <input
+                className='drop-zone__input-file'
+                ref={fileInputRef}
+                type='file'
+                multiple={true}
+                onChange={onFilesAdded}
+                onDrop={onDrop}
+              />
             </div>
-        }
-        <input
-          className='drop-zone__input-file'
-          ref={fileInputRef}
-          type='file'
-          multiple={true}
-          onChange={onFilesAdded}
-          onDrop={onDrop}
-        />
-      </div>
+          )
+      }
       <button 
         className='drop-zone__delete-btn'
         onClick={() => setFiles({})}

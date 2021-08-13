@@ -1,14 +1,19 @@
 import { GET_PHOTO_URLS, FETCH_DATA } from "./actionTypes"
 
 const initialState = {
-    data: {
-        pagination: {},
-        data: [],
-    },
-    isFetching: false
+  data: {
+    pagination: {},
+    data: [],
+  },
+  upload: {
+    success: false,
+    error: false,
+    isFetching: false,
+  },
+  isFetching: false
 }
 
-const galleryReducer = (state = initialState, {type, payload}) => {
+const reducer = (state = initialState, {type, payload}) => {
     switch(type) {
         case GET_PHOTO_URLS: {
             return {
@@ -26,4 +31,4 @@ const galleryReducer = (state = initialState, {type, payload}) => {
         default: return state
     }
 }
-export default galleryReducer;
+export default reducer;

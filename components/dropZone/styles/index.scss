@@ -22,7 +22,14 @@
     }
   }
 
-  &__dashed-cont, &__delete-btn, &__submit-btn {
+  &__preloader-cont {
+    height: 330px;
+  }
+
+  &__dashed-cont, 
+  &__preloader-cont, 
+  &__delete-btn,
+  &__submit-btn {
     display: flex;
     justify-content: center;
     align-items: center;

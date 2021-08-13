@@ -1,6 +1,6 @@
 import './styles/index.scss'
 import { useDispatch, useSelector } from 'react-redux' 
-import { getPhotoUrlsAction } from '../../pages/store/actions';
+import { getPhotoUrlsAction } from '../../store/actions';
 import { useEffect } from 'react';
 
 function PhotoItem({ url, id }) {
@@ -54,9 +54,9 @@ function GalleryNavigation( {pagination: {offset, limit, total}, isFetching} ) {
 
 function Gallery() {
     const dispatch = useDispatch();
-    const data = useSelector(({ galleryReducer }) => galleryReducer.data.data);
-    const pagination = useSelector(({ galleryReducer }) => galleryReducer.data.pagination);
-    const isFetching = useSelector(({ galleryReducer }) => galleryReducer.isFetching)
+    const data = useSelector((reducer) => reducer.data.data);
+    const pagination = useSelector((reducer) => reducer.data.pagination);
+    const isFetching = useSelector((reducer) => reducer.isFetching)
 
     useEffect(() => {
         dispatch(getPhotoUrlsAction())
