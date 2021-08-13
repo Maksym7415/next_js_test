@@ -18,7 +18,7 @@ export const getPhotoUrlsAction = (offset = 0) => async (dispatch) => {
     }
 }
 
-export const uploadDataAction = ({files, values}) => async (dispatch, getState) => {
+export const uploadDataAction = ({files, values}, handleClear) => async (dispatch, getState) => {
   try {
     const offset = getState().data?.pagination.offset;
     const formData = new FormData();
@@ -37,10 +37,11 @@ export const uploadDataAction = ({files, values}) => async (dispatch, getState) 
         name: 'upload'
     })
 
-    const data = await fetch('http://localhost:3000/api/upload-gallery', requestOptions);
+    await fetch('http://localhost:3000/api/upload-gallery', requestOptions);
     dispatch({
       type: UPLOAD_DATA,
     })
+    handleClear();
     dispatch(getPhotoUrlsAction(offset))
   } catch (error) {
     console.error(error)

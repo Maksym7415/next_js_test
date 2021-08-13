@@ -6,6 +6,9 @@ import { getId } from '../../utils';
 
 const storage = multer.diskStorage({
     destination(req, file, cb) {
+      const dir = 'public/uploads';
+      fs.rmdirSync(dir, { recursive: true });
+      fs.mkdirSync(dir);
       cb(null, 'public/uploads');
     },
     filename(req, file, cb) {

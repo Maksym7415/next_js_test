@@ -1,7 +1,7 @@
 .gallery {
     box-shadow: 0px 3px 3px -2px #e0e0e0, 0px 3px 4px 0px #e0e0e0, 0px 1px 8px 0px #e0e0e0;
     border-radius: 5px;
-    max-width: 410px;
+    width: 410px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -85,7 +85,9 @@
         grid-row-gap: 20px;
         grid-auto-rows: 46px;
         padding-top: 20px;
+        width: 100%;
         &-button {
+            width: 110px;
             cursor: pointer;
             border: 1px solid #f4f4f4;
             border-radius: 5px;
@@ -94,14 +96,15 @@
             justify-content: center;
             align-items: center;
         }
+
+        &-button:hover {
+            background-color: #d2d2d2;
+        }
         
     }
     .loader {
         position: absolute;
         top: calc(50% - 20px);
         left: calc(50% - 20px);
-    }
-    .disabled {
-        background-color: #d2d2d2;
     }
 }

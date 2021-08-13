@@ -39,15 +39,15 @@ function GalleryNavigation( {pagination: {offset, limit, total}, isFetching} ) {
     }
     return (
         <div className='gallery__navigation'>
-            <div onClick={back} className={`gallery__navigation-button ${isFetching || !+offset ? 'disabled' : ''}`}>
+            <button disabled={`${isFetching || !+offset ? 'disabled' : ''}`} onClick={back} className='gallery__navigation-button'>
                 <img src='../../images/arrow-left-line.png'/>
-            </div>
-            <div className={`gallery__navigation-button ${isFetching ? 'disabled' : ''}`} onClick={home}>
+            </button>
+            <button disabled={`${isFetching ? 'disabled' : ''}`} className='gallery__navigation-button' onClick={home}>
                 <img src='../../images/home-line.png'/>
-            </div>
-            <div onClick={next} className={`gallery__navigation-button ${isFetching || +limit + +offset == total ? 'disabled' : ''}`}>
+            </button>
+            <button disabled={`${isFetching || +limit + +offset >= total ? 'disabled' : ''}`} onClick={next} className='gallery__navigation-button'>
                 <img src='../../images/arrow-right-line.png'/>
-            </div>
+            </button>
         </div>
     )
 }

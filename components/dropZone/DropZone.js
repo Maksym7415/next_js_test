@@ -29,6 +29,11 @@ function DropZone() {
     setValues((prev) => ({ ...prev, [name]: value }))
   }
 
+  const handleClear = () => {
+    setFiles({});
+    setValues({input: "", textarea: ""})
+  }
+
   const readImage = (file) => {
     // if file not an image - return. accepting just images
     if (file.type && file.type.indexOf("image") === -1) {
@@ -143,11 +148,11 @@ function DropZone() {
       >
         Delete ALL photos
       </button>
-      <button 
+      <button
+        disabled={isPhotosUploading || !Object.keys(files).length}
         className='drop-zone__submit-btn'
         onClick={() => {
-          setFiles({})
-          dispatch(uploadDataAction({files, values}))
+          dispatch(uploadDataAction({files, values}, handleClear))
         }}
       >
         Submit
